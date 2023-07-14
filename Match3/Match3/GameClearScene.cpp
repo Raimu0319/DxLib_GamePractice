@@ -43,3 +43,36 @@ int GameClearScene_Initialize(void)
 戻り値：なし
 */
 
+void GameClearScene_Update(void)
+{
+
+	//ゲームクリア効果音再生チェック
+
+	if (CheckSoundMem(GameClearSE) == 0)
+	{
+		if (GameClearFlag == TRUE) 
+		{
+
+			Change_Scene(E_GAMEMAIN);
+
+		}
+		else
+		{
+
+			PlaySoundMem(GameClearSE, DX_PLAYTYPE_BACK);
+			GameClearFlag = TRUE;
+
+		}
+	}
+}
+
+//ゲームクリア画面：描画処理
+//引数：なし
+//戻り値：なし
+
+void GameClearScene_Draw(void)
+{
+
+	DrawGraph(0, 0, GameClearImage, FALSE);
+
+}
