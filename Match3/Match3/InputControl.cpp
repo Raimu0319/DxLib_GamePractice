@@ -40,7 +40,7 @@ void Input_Updata(void)
 	GetMousePoint(&mouse_position_x, &mouse_position_y);
 
 }
-]
+
 /*
 	入力制御機能：ESCキー入力チェック
 	引　数：なし

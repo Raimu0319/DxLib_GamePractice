@@ -284,7 +284,100 @@ void CreateBlock(void)
 */
 void SelectBlock(void)
 {
-	//9ページの下から
+
+	int TmpBlock;
+	int Result;
+
+	//カーソル座標の習得
+	Select[SELECT_CURSOR].x = GetMousePositionX() / BLOCKSIZE;
+	Select[SELECT_CURSOR].y = GetMousePositionY() / BLOCKSIZE;
+
+	//選択ブロックの範囲を制御
+	if (Select[SELECT_CURSOR].x < 0)
+	{
+
+		Select[SELECT_CURSOR].x = 0;
+
+	}
+	if (Select[SELECT_CURSOR].x > WIDTH - 3)
+	{
+
+		Select[SELECT_CURSOR].x = WIDTH - 3;
+	}
+	if (Select[SELECT_CURSOR].y < 0)
+	{
+
+		Select[SELECT_CURSOR].y = 0;
+
+	}
+	if (Select[SELECT_CURSOR].y > HEIGHT - 3)
+	{
+
+		Select[SELECT_CURSOR].y = HEIGHT - 3;
+	}
+
+	//クリックでブロックを選択
+	if (GetKeyFlg(MOUSE_INPUT_LEFT)) {
+
+		//クリック効果音
+		PlaySoundMem(ClickSE, DX_PLAYTYPE_BACK);
+
+		if (ClickStatus = E_NONE) {
+
+			Select[NEXT_CURSOR].x = Select[SELECT_CURSOR].x;
+			Select[NEXT_CURSOR].y = Select[SELECT_CURSOR].y;
+			ClickStatus = E_ONCE;
+
+		}
+		else if (ClickStatus == E_ONCE &&
+			((abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x)
+				== 1 &&
+				(abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y)
+					== 0)) ||
+				(abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x)
+					== 0 &&
+					(abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y)
+						== 1)))
+		{
+
+			Select[TMP_CURSOR].x = Slect[SELECT_CURSOR].x;
+			Select[TMP_CURSOR].y = Slect[SELECT_CURSOR].y;
+			ClickStatus = E_SECOND;
+
+		}
+
+	}
+
+	//選択ブロックを交換する
+
+	if (ClickStatus == E_SECOND)
+	{
+
+		TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
+
+		Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image =
+			Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image;
+
+		Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image =
+			TmpBlock;
+
+			//連鎖が三つ以上か調べる。
+			Result = 0;
+			Result += combo_check(Select[NEXT_CURSOR].y + 1, Select[NEXT_CURSOR].x + 1);
+
+			Result += combo_check(Select[TMP_CURSOR].y + 1, Select[TMP_CURSOR].x + 1);
+
+			//連鎖が3未満なら選択ブロックを元に戻す
+			if (Result == 0)
+			{
+
+				int TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
+				下から七行目
+
+			}
+
+	}
+
 }
 
 
