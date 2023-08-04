@@ -29,7 +29,7 @@ void Input_Initialize(void)
 	戻り値：なし
 */
 
-void Input_Updata(void)
+void Input_Update(void)
 {
 
 	//マウス入力の情報の取得
@@ -52,7 +52,7 @@ int Input_Escape(void)
 	int ret = FALSE;
 
 	//ESCキーが押されたらループから抜ける
-	if (ChackHitKey(KEY_INPUT_ESCAPE))
+	if (CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		ret = TRUE;
 	}

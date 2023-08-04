@@ -5,5 +5,6 @@
 
 //プロトタイプ宣言
 
-void FreamControl_Initialize(void);
-void FreamContlol_Update(void);
+int GameClearScene_Initialize();
+void GameClearScene_Update(void);
+void GameClearScene_Draw(void);

@@ -30,7 +30,7 @@ int GameMainScene_Initialize(void)
 	int i;
 
 	//画像読み込み
-	LoadDivGraph("image/number.png", NUMBER_IMAGE_MAX, NUMBER_IMAGE_MAX, 1, 60, 120, NumberImage);
+	LoadDivGraph("images/number.png", NUMBER_IMAGE_MAX, NUMBER_IMAGE_MAX, 1, 60, 120, NumberImage);
 
 	//ステージ機能初期化
 	ret = StageInitialize();
@@ -74,7 +74,7 @@ int GameMainScene_Initialize(void)
 	戻り値：なし
 */
 
-void GameMainScene_Updata(void) {
+void GameMainScene_Update(void) {
 
 	switch (Get_StageState())
 	{
@@ -141,7 +141,7 @@ void GameMainScene_Draw(void)
 	StageDraw();
 
 	//フェードアウト状態か？
-	if (Get_Stage() == 1);
+	if (Get_StageState() == 1)
 	{
 
 		FadeOutBlock();	//フェードアウトする。

@@ -2,5 +2,5 @@
 
 //プロトタイプ宣言
 int GameMainScene_Initialize(void);
-int GameMainScene_Updata(void);
-int GameMainScene_Draw(void);
+void GameMainScene_Update(void);
+void GameMainScene_Draw(void);

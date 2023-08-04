@@ -1,52 +1,52 @@
-/*
-@ƒvƒƒOƒ‰ƒ~ƒ“ƒOŽÀK
- @ƒ}ƒbƒ`‚RƒQ[ƒ€‚Ì§ì
+ï»¿/*
+ã€€ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°å®Ÿç¿’
+ ã€€ãƒžãƒƒãƒï¼“ã‚²ãƒ¼ãƒ ã®åˆ¶ä½œ
 */
 
 #include"DxLib.h"
-#include"FreamContorol.h"
-#include"InputContorol.h"
+#include"FreamControl.h"
+#include"InputControl.h"
 #include"SceneManager.h"
 
-//ƒ}ƒNƒ’è‹`
+//ãƒžã‚¯ãƒ­å®šç¾©
 
-#define SCREEN_HEIGHT (480)  //ƒXƒNƒŠ[ƒ“ƒTƒCƒYi‚‚³j
-#define SCREEN_WIDTH (640)@ //ƒXƒNƒŠ[ƒ“ƒTƒCƒYi•j
-#define SCREEN_COLORBIT (32) //ƒXƒNƒŠ[ƒ“ƒJƒ‰[ƒrƒbƒg
-#define FONT_SIZE (20)       //•¶ŽšƒTƒCƒY
+#define SCREEN_HEIGHT	(480)	//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚ºï¼ˆé«˜ã•ï¼‰
+#define SCREEN_WIDTH	(640)	//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚ºï¼ˆå¹…ï¼‰
+#define SCREEN_COLORBIT (32) //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚«ãƒ©ãƒ¼ãƒ“ãƒƒãƒˆ
+#define FONT_SIZE (20)       //æ–‡å­—ã‚µã‚¤ã‚º
 
-//Œ^’è‹`
+//åž‹å®šç¾©
 
-//ƒOƒ[ƒoƒ‹•Ï”éŒ¾
+//ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°å®£è¨€
 
-//ƒvƒƒgƒ^ƒCƒvéŒ¾
+//ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 
-//ƒvƒƒOƒ‰ƒ€‚ÌŠJŽn
+//ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®é–‹å§‹
 
 int WINAPI WinMain(_In_ HINSTANCE hinstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR ipCmdLine, _In_ int nShowCmd)
 {
-		//ƒEƒBƒ“ƒhƒEƒ^ƒCƒgƒ‹Ý’è
+		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚¿ã‚¤ãƒˆãƒ«è¨­å®š
 	SetMainWindowText("Match 3 Puzzle");
 
-		//ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚Å‹N“®
+		//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•
 	ChangeWindowMode(TRUE);
 
-		//‰æ–ÊƒTƒCƒY‚ÌÅ‘åƒTƒCƒYAƒJƒ‰[ƒrƒbƒg”‚ðÝ’è
-	SetGraphMode(SCREEN_WIDTH, CREEN_HEIGHT, SCREEN_COLORBIT );
+		//ç”»é¢ã‚µã‚¤ã‚ºã®æœ€å¤§ã‚µã‚¤ã‚ºã€ã‚«ãƒ©ãƒ¼ãƒ“ãƒƒãƒˆæ•°ã‚’è¨­å®š
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLORBIT);
 
-		//Dxƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰Šú‰»ˆ—
+		//Dxãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®åˆæœŸåŒ–å‡¦ç†
 
 	if (DxLib_Init() == D_ERROR)
 	{
 		return D_ERROR;
 	}
 
-	//Še‹@”\‚Ì‰Šú‰»ˆ—
-	FreamControl_Initialize();  //ƒtƒŒ[ƒ€ƒŒ[ƒg§Œä‹@”\
-	Input_Initialize();			//“ü—Í§Œä‹@”\
+	//å„æ©Ÿèƒ½ã®åˆæœŸåŒ–å‡¦ç†
+	FreamControl_Initialize();  //ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆåˆ¶å¾¡æ©Ÿèƒ½
+	Input_Initialize();			//å…¥åŠ›åˆ¶å¾¡æ©Ÿèƒ½
 
-	//ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‰Šú‰»ˆ—
-	//ƒGƒ‰[‚ª”­¶‚µ‚½‚çAI—¹‚·‚é
+	//ã‚·ãƒ¼ãƒ³ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼åˆæœŸåŒ–å‡¦ç†
+	//ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ãŸã‚‰ã€çµ‚äº†ã™ã‚‹
 	if (SceneManager_Initialize(E_TITLE) == D_ERROR)
 	{
 
@@ -54,37 +54,37 @@ int WINAPI WinMain(_In_ HINSTANCE hinstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	}
 
-	//•`‰ææ‰æ–Ê‚ð— ‚É‚·‚é
+	//æç”»å…ˆç”»é¢ã‚’è£ã«ã™ã‚‹
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//•¶ŽšƒTƒCƒY‚ðÝ’è
+	//æ–‡å­—ã‚µã‚¤ã‚ºã‚’è¨­å®š
 	SetFontSize(FONT_SIZE);
 
-	//ƒQ[ƒ€ƒ‹[ƒv
+	//ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 	while (ProcessMessage() != D_ERROR && Input_Escape() == FALSE)
 	{
 
-		//“ü—Í§Œä‹@”\XVˆ—
-		input_Update();
+		//å…¥åŠ›åˆ¶å¾¡æ©Ÿèƒ½æ›´æ–°å‡¦ç†
+		Input_Update();
 
-		//ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[XVˆ—
-		SceneManager_Opdate();
+		//ã‚·ãƒ¼ãƒ³ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼æ›´æ–°å‡¦ç†
+		SceneManager_Update();
 
-		//‰æ–ÊƒNƒŠƒA
+		//ç”»é¢ã‚¯ãƒªã‚¢
 		ClearDrawScreen();
 
-		//ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[•`‰æˆ—
+		//ã‚·ãƒ¼ãƒ³ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼æç”»å‡¦ç†
 		SceneManager_Draw();
 
-		//ƒtƒŒ[ƒ€ƒŒ[ƒg§Œäˆ—
+		//ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆåˆ¶å¾¡å‡¦ç†
 		FreamControl_Update();
 
-		//‰æ–Ê‚Ì“à—e‚ð•\‰æ–Ê‚É”½‰f
+		//ç”»é¢ã®å†…å®¹ã‚’è¡¨ç”»é¢ã«åæ˜ 
 		ScreenFlip();
 
 	}
 
-	//Dxƒ‰ƒCƒuƒ‰ƒŠŽg—p‚ÌI—¹ˆ—
+	//Dxãƒ©ã‚¤ãƒ–ãƒ©ãƒªä½¿ç”¨ã®çµ‚äº†å‡¦ç†
 
 	DxLib_End();
 

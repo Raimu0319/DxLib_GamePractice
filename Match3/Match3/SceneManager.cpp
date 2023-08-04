@@ -68,7 +68,7 @@
 		引　数；なし
 		戻り値：なし
 */
-	void SceneManager_Updata(void) {
+	void SceneManager_Update(void) {
 
 		//前フレームとゲームモードが違っていたらシーンを切り替える
 		if (Game_Mode != Next_Mode)
@@ -92,7 +92,7 @@
 
 			case E_GAME_CLEAR:
 				GameClearScene_Update();
-				berak;
+				break;
 
 			case E_GAME_OVER:
 				GameOverScene_Update();
@@ -125,7 +125,7 @@
 
 		case E_GAME_CLEAR:
 			GameClearScene_Draw();
-			berak;
+			break;
 
 		case E_GAME_OVER:
 			GameOverScene_Draw();

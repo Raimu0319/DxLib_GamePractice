@@ -49,7 +49,7 @@ int GameOverScene_Initialize(void)
 
 */
 
-void ameOverScene_Updata(void)
+void GameOverScene_Update(void)
 {
 
 	//ゲームオーバー効果音再生チェック

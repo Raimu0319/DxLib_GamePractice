@@ -18,8 +18,18 @@
 //型定義
 typedef struct
 {
+	int flg;
+	int x, y;
+	int width, height;
+	int image;
+	int backup;
+}T_Object;
+
+typedef struct
+{
 	int x;
 	int y;
+
 }T_CURSOR;
 
 enum
@@ -49,8 +59,8 @@ int MoveBlockSE;	//ブロック移動SE
 
 //プロトタイプ宣言
 int combo_check(int x, int y);
-void comdo_check_h(int y, int x,int * cnt,int  * col);
-void comdo_check_w(int y, int x, int* cnt, int* col);
+void combo_check_h(int y, int x, int* cnt, int* col);
+void combo_check_w(int y, int x, int* cnt, int* col);
 void save_block(void);
 void restore_block(void);
 
@@ -213,7 +223,7 @@ void CreateBlock(void)
 			for (j = 0; j < WIDTH; j++)
 			{
 
-				if (j == 0 || j == WIDTH - 1 || i = HEIGHT - 1 || i == 0)
+				if (j == 0 || j == WIDTH - 1 || i == HEIGHT - 1 || i == 0)
 				{
 
 					Block[i][j].flg = FALSE;
@@ -228,7 +238,7 @@ void CreateBlock(void)
 					Block[i][j].y = (i - 1) * BLOCKSIZE;
 					Block[i][j].width = BLOCKSIZE;
 					Block[i][j].height = BLOCKSIZE;
-					Block[i][j].image = BLOCKSIZE;
+					Block[i][j].image = GetRand(7) + 1; //1～8の乱数
 
 				}
 
@@ -525,7 +535,7 @@ void CheckBlock(void)
 	int i, j;
 
 	//ブロック連鎖チェック
-	for (i - 1; i < HEIGHT - 1; i++)
+	for (i = 1; i < HEIGHT - 1; i++)
 	{
 
 		for (j = 1; j < WIDTH - 1; j++)
@@ -646,7 +656,7 @@ void Set_StageMission(int mission)
 	戻り値：連鎖有無（0；なし、1：あり）
 */
 
-int		combo_check(void)
+int	combo_check(int x, int y)
 {
 
 	int ret = FALSE;
@@ -668,7 +678,7 @@ int		combo_check(void)
 	int CountW = 0;
 	int ColorW = 0;
 	save_block();
-	combo_check_w(y, x, &CcountW, &ColorW);
+	combo_check_w(y, x, &CountW, &ColorW);
 	if (CountW < 3)
 	{
 
@@ -702,7 +712,6 @@ int		combo_check(void)
 	return ret;
 
 }
-
 
 /*
 	ステージ制御機能：連鎖チェック処理（縦方向）
