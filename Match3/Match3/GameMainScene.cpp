@@ -16,8 +16,8 @@ int GameCount; //初期化されないようにするためのカウント
 int ReStartFlag;
 int NumberImage[NUMBER_IMAGE_MAX]; //数字用画像
 
-/*
-* 
+
+/* 
 	ゲームメイン画面
 	引数：なし
 	戻り値：エラー情報
@@ -62,7 +62,7 @@ int GameMainScene_Initialize(void)
 
 	}
 
-	GameTime = TIMELIMIT;	//制s現時間の初期化
+	GameTime = TIMELIMIT;	//制現時間の初期化
 
 	return ret;
 

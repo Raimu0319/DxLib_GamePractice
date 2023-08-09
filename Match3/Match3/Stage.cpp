@@ -58,7 +58,7 @@ int FadeOutSE;	//フェードアウトSE
 int MoveBlockSE;	//ブロック移動SE
 
 //プロトタイプ宣言
-int combo_check(int x, int y);
+int combo_check(int y, int x);
 void combo_check_h(int y, int x, int* cnt, int* col);
 void combo_check_w(int y, int x, int* cnt, int* col);
 void save_block(void);
@@ -92,7 +92,7 @@ int StageInitialize(void)
 	Stage_Score = 0;
 	ClearFlag = FALSE;
 
-	for (i = 3; i < 3; i++)
+	for (i = 0; i < 3; i++)
 	{
 		Select[i].x = 0;
 		Select[i].y = 0;
@@ -178,8 +178,8 @@ void StageDraw(void) {
 
 	}
 
-//選択ブロックを描画
-DrawGraph(Select[SELECT_CURSOR].x* BLOCKSIZE, Select[SELECT_CURSOR].y* BLOCKSIZE, BlockImage[9], TRUE);
+	//選択ブロックを描画
+	DrawGraph(Select[SELECT_CURSOR].x * BLOCKSIZE, Select[SELECT_CURSOR].y * BLOCKSIZE, BlockImage[9], TRUE);
 	if (ClickStatus != E_NONE)
 	{
 
@@ -187,14 +187,14 @@ DrawGraph(Select[SELECT_CURSOR].x* BLOCKSIZE, Select[SELECT_CURSOR].y* BLOCKSIZE
 
 	}
 
-//ミッションを描画
+	//ミッションを描画
 	SetFontSize(20);
 	DrawFormatString(590, 211, GetColor(255, 255, 255), "%3d", Stage_Mission);
 
 	//アイテムの取得個数を描画
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
-		
+
 		DrawRotaGraph(540, 245 + i * 30, 0.5f, 0, BlockImage[i + 1], TRUE, 0);
 		DrawFormatString(580, 235 + i * 30, GetColor(255, 255, 255), "%3d", Item[i]);
 
@@ -216,7 +216,7 @@ void CreateBlock(void)
 	do
 	{
 		Check = 0;
-		
+
 		for (i = 0; i < HEIGHT; i++)
 		{
 
@@ -262,7 +262,7 @@ void CreateBlock(void)
 			}
 
 		}
-		
+
 		//ブロック連鎖チェック
 		for (i = 1; i < HEIGHT - 1; i++)
 		{
@@ -275,16 +275,14 @@ void CreateBlock(void)
 			}
 		}
 	} while (Check != 0);
-	
 
-		for (i = 0; i < ITEM_MAX; i++)
-		{
 
-			Item[i] = 0;
+	for (i = 0; i < ITEM_MAX; i++)
+	{
 
-		}
+		Item[i] = 0;
 
-	
+	}
 
 }
 
@@ -341,14 +339,10 @@ void SelectBlock(void)
 
 		}
 		else if (ClickStatus == E_ONCE &&
-			((abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x)
-				== 1 &&
-				(abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y)
-					== 0)) ||
-				(abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x)
-					== 0 &&
-					abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y)
-						== 1)))
+			((abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x) == 1 &&
+				(abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y) == 0)) ||
+				(abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x) == 0 &&
+					abs(Select[NEXT_CURSOR].y - Select[SELECT_CURSOR].y) == 1)))
 		{
 
 			Select[TMP_CURSOR].x = Select[SELECT_CURSOR].x;
@@ -366,41 +360,41 @@ void SelectBlock(void)
 
 		TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
 
-		Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image =
+		Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image =
 			Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image;
 
 		Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image =
 			TmpBlock;
 
-			//連鎖が三つ以上か調べる。
-			Result = 0;
-			Result += combo_check(Select[NEXT_CURSOR].y + 1, Select[NEXT_CURSOR].x + 1);
+		//連鎖が三つ以上か調べる。
+		Result = 0;
+		Result += combo_check(Select[NEXT_CURSOR].y + 1, Select[NEXT_CURSOR].x + 1);
 
-			Result += combo_check(Select[TMP_CURSOR].y + 1, Select[TMP_CURSOR].x + 1);
+		Result += combo_check(Select[TMP_CURSOR].y + 1, Select[TMP_CURSOR].x + 1);
 
-			//連鎖が3未満なら選択ブロックを元に戻す
-			if (Result == 0)
-			{
+		//連鎖が3未満なら選択ブロックを元に戻す
+		if (Result == 0)
+		{
 
-				int TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
+			int TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
 
-				Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image
-					= Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image;
+			Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image
+				= Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image;
 
-				Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image
-					= TmpBlock;
+			Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image
+				= TmpBlock;
 
-			}
-			else
-			{
+		}
+		else
+		{
 
-				//連鎖が三つ以上ならブロックを消しブロック移動処理へ移行する
-				Stage_State = 1;
+			//連鎖が三つ以上ならブロックを消しブロック移動処理へ移行する
+			Stage_State = 1;
 
-			}
+		}
 
-			//次にクリックできるようにClockFlagを0にする
-			ClickStatus = E_NONE;
+		//次にクリックできるようにClockFlagを0にする
+		ClickStatus = E_NONE;
 
 	}
 
@@ -433,7 +427,7 @@ void FadeOutBlock(void)
 		for (j = 1; j < WIDTH - 1; j++)
 		{
 
-			if (Block[i][j].image = 0)
+			if (Block[i][j].image == 0)
 			{
 
 				DrawGraph(Block[i][j].x, Block[i][j].y, BlockImage[Block[i][j].backup], TRUE);
@@ -577,7 +571,7 @@ void CheckClear(void)
 
 	int i;
 
-	for(i = 0 ; i < ITEM_MAX; i++)
+	for (i = 0; i < ITEM_MAX; i++)
 	{
 
 		if (Item[i] >= Stage_Mission)
@@ -591,7 +585,7 @@ void CheckClear(void)
 	}
 	if (ClearFlag != TRUE)
 	{
-		
+
 		Stage_State = 0;
 
 	}
@@ -656,7 +650,7 @@ void Set_StageMission(int mission)
 	戻り値：連鎖有無（0；なし、1：あり）
 */
 
-int	combo_check(int x, int y)
+int	combo_check(int y, int x)
 {
 
 	int ret = FALSE;
@@ -779,13 +773,13 @@ void combo_check_w(int y, int x, int* cnt, int* col)
 	if (Block[y][x + 1].image == Color)
 	{
 
-		combo_check_h(y, x + 1, cnt, col);
+		combo_check_w(y, x + 1, cnt, col);
 
 	}
 	if (Block[y][x - 1].image == Color)
 	{
 
-		combo_check_h(y, x - 1, cnt, col);
+		combo_check_w(y, x - 1, cnt, col);
 
 	}
 }
