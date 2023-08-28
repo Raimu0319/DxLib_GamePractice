@@ -16,6 +16,8 @@ int GameCount; //初期化されないようにするためのカウント
 int ReStartFlag;
 int NumberImage[NUMBER_IMAGE_MAX]; //数字用画像
 
+int game;
+
 
 /* 
 	ゲームメイン画面
@@ -46,22 +48,29 @@ int GameMainScene_Initialize(void)
 		}
 	}
 
-	//ゲームプレイが初回かどうか？
-	if (GameCount == 0) {
+	if (game == 0) {
+		//ゲームプレイが初回かどうか？
+		if (GameCount == 0)
+		{
 
-		GameScore = 0;	//スコアの初期化
-		GameLevel = 1;	//ゲームレベルの初期化
-		Set_StageMission(3);	//ミッションの初期化
-		GameCount++;	//次回の設定
+			GameScore = 0;	//スコアの初期化
+			GameLevel = 1;	//ゲームレベルの初期化
+			Set_StageMission(1);	//ミッションの初期化 //	初回ミッションレベル
+			GameCount++;	//次回の設定
+
+		}
+		else
+		{
+
+			GameLevel++;	//ゲームレベルの更新
+			GameCount++;
+			Set_StageMission(1);//ミッションを増やす	次のミッションレベル
+
+		}
+
+		game++;
+
 	}
-	else
-	{
-
-		GameLevel++;	//ゲームレベルの更新
-		Set_StageMission(3);	//ミッションを増やす
-
-	}
-
 	GameTime = TIMELIMIT;	//制現時間の初期化
 
 	return ret;
@@ -113,14 +122,18 @@ void GameMainScene_Update(void) {
 
 		Change_Scene(E_GAME_OVER);
 
+		game = 0;
+
 	}
 
 	//ミッションを達成したら、ゲームクリアに移動する
 	if (Get_StageClearFlag())
 	{
 
-		Change_Scene(E_GAME_CLEAR);
+			Change_Scene(E_GAME_CLEAR);
 
+			game = 0;
+		
 	}
 }
 
@@ -161,7 +174,7 @@ void GameMainScene_Draw(void)
 	PosX = 620;
 	do {
 
-		DrawRotaGraph(PosX,160,0.3f,0, NumberImage[tmp_level % 10], TRUE);
+		DrawRotaGraph(PosX,160,0.3f,0, NumberImage[tmp_score % 10], TRUE);
 		tmp_score /= 10;
 		PosX -= 20;
 

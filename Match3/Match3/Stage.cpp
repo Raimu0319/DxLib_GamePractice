@@ -574,7 +574,7 @@ void CheckClear(void)
 	for (i = 0; i < ITEM_MAX; i++)
 	{
 
-		if (Item[i] >= Stage_Mission)
+		if (Item[i] >= Stage_Mission + 3)
 		{
 
 			ClearFlag = TRUE;
@@ -641,6 +641,7 @@ void Set_StageMission(int mission)
 {
 
 	Stage_Mission += mission;
+
 }
 
 /*
@@ -666,6 +667,7 @@ int	combo_check(int y, int x)
 
 		restore_block();	//３個未満なら戻す
 
+		
 	}
 
 	//横方向のチェック
@@ -744,6 +746,7 @@ void combo_check_h(int y, int x, int* cnt, int* col)
 
 	}
 
+
 }
 
 /*
@@ -782,6 +785,7 @@ void combo_check_w(int y, int x, int* cnt, int* col)
 		combo_check_w(y, x - 1, cnt, col);
 
 	}
+
 }
 
 /*
