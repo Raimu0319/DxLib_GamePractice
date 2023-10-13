@@ -579,29 +579,34 @@ void check_line(void)
 {
 	int i, j, k;	//ループカウンタ
 
-	for (i = 0; i < FIELD_WIDTH; j++)
+	for (i = 0; i < FIELD_HEIGHT - 1; i++)
 	{
-		//行の途中が空いているか？
-		if (Field[i][j] == E_BLOCK_EMPTY)
-		{
-			break;
-		}
-	}
-
-	//一列そろっていたら、カウントを増やし、一段下げる
-	if (j >= FIELD_WIDTH)
-	{
-		//カウントを増加
-		DeleteLine++;
-
-		//一段下げる
-		for (k = i; k > 0; k--)
-		{
-			for (j - i; j < FIELD_WIDTH; j++)
+		for (j = 1; j < FIELD_WIDTH; j++) {
+			//行の途中が空いているか？
+			if (Field[i][j] == E_BLOCK_EMPTY)
 			{
-				Field[k][j] = Field[k - 1][j];
+				break;
 			}
 		}
-		PlaySoundMem(SoundEffict[0], DX_PLAYTYPE_BACK, TRUE);
+
+
+		//一列そろっていたら、カウントを増やし、一段下げる
+		if (j >= FIELD_WIDTH)
+		{
+			//カウントを増加
+			DeleteLine++;
+
+			//一段下げる
+			for (k = i; k > 0; k--)
+			{
+				for (j - i; j < FIELD_WIDTH; j++)
+				{
+					Field[k][j] = Field[k - 1][j];
+				}
+			}
+			PlaySoundMem(SoundEffict[0], DX_PLAYTYPE_BACK, TRUE);
+		}
+
 	}
+
 }
