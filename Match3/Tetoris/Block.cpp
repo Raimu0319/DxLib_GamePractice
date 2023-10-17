@@ -205,7 +205,7 @@ void Block_Update(void)
 	}
 
 	//ブロックの回転（反時計周り）
-	if ((GetButtonDown(XINPUT_BUTTON_A) = TRUE) ||
+	if ((GetButtonDown(XINPUT_BUTTON_A) == TRUE) ||
 		(GetButtonDown(XINPUT_BUTTON_Y) == TRUE))
 	{
 		turn_block(TURN_ANTICROCKWICE);
@@ -599,7 +599,7 @@ void check_line(void)
 			//一段下げる
 			for (k = i; k > 0; k--)
 			{
-				for (j - i; j < FIELD_WIDTH; j++)
+				for (j = i; j < FIELD_WIDTH; j++)
 				{
 					Field[k][j] = Field[k - 1][j];
 				}

@@ -1,4 +1,3 @@
-//RankingScene.h
 #include "RankingScene.h"
 #include "DxLib.h"
 #include "InputControl.h"
@@ -46,37 +45,13 @@ void ranking_input_name_draw(void);			//名前入力描画処理
 	引　数：なし
 	戻り値：エラー情報（-1：異常有、-1以外：正常終了）
 */
-int RankingSceneInitialize(void)
+int RankingScene_Initialize(void)
 {
 	int ret = 0;
 
 	file_read();
 
 	switch (DispMode)
-	{
-		case RANKING_INPUT_MODE;
-			Cursor.x = 0;
-			Cursor.y = 0;
-			name_num = 0;
-			break;
-		case RANKING_DISP_MODE;
-		default:
-
-			break;
-	}
-
-	return ret;
-
-}
-
-/*
-	ランキング画面：初期化処理
-	引　数：なし
-	戻り値：エラー情報（-1：異常有、-1以外：正常終了）
-*/
-void RankingScene_Update(void)
-{
-	switch (DespMode)
 	{
 		case RANKING_INPUT_MODE:
 			Cursor.x = 0;
@@ -92,6 +67,7 @@ void RankingScene_Update(void)
 	return ret;
 
 }
+
 /*
 	ランキング画面：更新処理
 	引　数：なし

@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "FreamControl.h"
-#include "ScenManager.h"
+#include "SceneManager.h"
 #include "InputControl.h"
 
 //マクロ定義
@@ -32,7 +32,7 @@ int WINAPI WinMain(_In_ HINSTANCE hinstance, _In_opt_ HINSTANCE hPrevInstance, _
 	}
 
 	//フレーム制御機能初期化処理
-	FreamContorol_Initialize();
+	FreamControl_Initialize();
 
 	//シーン管理機能初期化処理
 	SceneManager_Initialize(E_TITLE);
@@ -51,7 +51,7 @@ int WINAPI WinMain(_In_ HINSTANCE hinstance, _In_opt_ HINSTANCE hPrevInstance, _
 		D_NORMALITY)
 	{
 		//フレーム制御機能更新処理
-		FrameControl_Update();
+		FreamControl_Update();
 
 		//画面の初期化
 		ClearDrawScreen();
