@@ -15,7 +15,7 @@
 #define DROP_BLOCK_INIT_X	(4)
 #define DROP_BLOCK_INIT_Y	(-1)
 #define DROP_SPEED				(60)
-#define TURN_CUOCKWICE			(0)
+#define TURN_CROCKWICE			(0)
 #define TURN_ANTICROCKWICE	(1)
 
 //型定義
@@ -129,7 +129,7 @@ void check_line(void);					//ブロックの横一列確認処理
 
 */
 
-int block_Initialize(void) {
+int Block_Initialize(void) {
 
 	int ret = 0;	//戻り値
 	int i = 0;
@@ -214,7 +214,7 @@ void Block_Update(void)
 	if ((GetButtonDown(XINPUT_BUTTON_B) == TRUE) ||
 		(GetButtonDown(XINPUT_BUTTON_X) == TRUE))
 	{
-		turn_block(TURN_ANTICROCKWICE);
+		turn_block(TURN_CROCKWICE);
 	}
 	//落下処理
 	WaitTime++;		//カウンタの更新
@@ -222,7 +222,7 @@ void Block_Update(void)
 	{
 		if (check_overlap(DropBlock_X, DropBlock_Y + 1) == TRUE)
 		{
-		DropBlock_Y++;
+			DropBlock_Y++;
 		}
 		else
 		{
@@ -235,8 +235,7 @@ void Block_Update(void)
 		}
 
 			//カウンタの初期化
-			WaitTime = 0;
-	
+		WaitTime = 0;
 	}
 }
 
@@ -261,20 +260,9 @@ void Block_Draw(void)
 			}
 		}
 	}
-	//フィールのブロックを描画
-	for (i = 0; j < FIELD_HEIGHT; i++)
-	{
-		for (j = 0; i < FIELD_WIDTH; j++)
-		{
-			if (Field[i][j] != E_BLOCK_WALL)
-			{
-				DrawGraph(j * BLOCK_SIZE, i * BLOCK_SIZE, BlockImage[Field[i][j]],
-					TRUE);
-			}
-		}
-	}
+	
 	//次のブロックとストックされたブロックを描画
-	for (i = 0; j < BLOCK_TROUT_SIZE; j++)
+	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 	{
 		for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 		{
@@ -339,9 +327,10 @@ void create_field(void)
 			}
 			else
 			{
-				Field[i][j] = E_BLOCK_WALL;		//空状態にする
+				Field[i][j] = E_BLOCK_EMPTY;		//空状態にする
 			}
 		}
+
 
 	}
 
@@ -439,7 +428,7 @@ void change_block(void)
 	{
 		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 		{
-			for (j = 0; j < BLOCK_TROUT_SIZE; j++);
+			for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 			{
 				temp[i][j] = DropBlock[i][j];
 				DropBlock[i][j] = Stock[i][j];
@@ -531,13 +520,13 @@ int check_overlap(int x, int y)
 {
 	int i, j;		//ループカウンタ
 	
-	for (i = 0; j < BLOCK_TROUT_SIZE; i++)
+	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 	{
 		for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 		{
 			if (DropBlock[i][j] != E_BLOCK_EMPTY)
 			{
-				if (Field[i + y][j + y] != E_BLOCK_EMPTY)
+				if (Field[i + y][j + x] != E_BLOCK_EMPTY)
 				{
 					return FALSE;
 				}
@@ -563,7 +552,7 @@ void lock_block(int x, int y)
 		{
 			if (DropBlock[i][j] != E_BLOCK_EMPTY)
 			{
-				Field[y + 1][x + j] = DropBlock[i][j];
+				Field[y + i][x + j] = DropBlock[i][j];
 			}
 		}
 	}
@@ -581,7 +570,8 @@ void check_line(void)
 
 	for (i = 0; i < FIELD_HEIGHT - 1; i++)
 	{
-		for (j = 1; j < FIELD_WIDTH; j++) {
+		for (j = 1; j < FIELD_WIDTH; j++) 
+		{
 			//行の途中が空いているか？
 			if (Field[i][j] == E_BLOCK_EMPTY)
 			{
@@ -599,7 +589,7 @@ void check_line(void)
 			//一段下げる
 			for (k = i; k > 0; k--)
 			{
-				for (j = i; j < FIELD_WIDTH; j++)
+				for (j = 1; j < FIELD_WIDTH; j++)
 				{
 					Field[k][j] = Field[k - 1][j];
 				}

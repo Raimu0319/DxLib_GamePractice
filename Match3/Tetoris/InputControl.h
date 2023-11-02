@@ -1,7 +1,5 @@
 #pragma once
 
-#include "InputControl.h"
-
 //プロトタイプ宣言
 void InputControl_Initialize(void);		//初期化処理
 void InputControl_Update(void);			//更新処理

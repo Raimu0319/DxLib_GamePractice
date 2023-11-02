@@ -60,6 +60,9 @@ int WINAPI WinMain(_In_ HINSTANCE hinstance, _In_opt_ HINSTANCE hPrevInstance, _
 		InputControl_Update();
 
 		//シーン管理機能更新処理
+		SceneManager_Update();
+
+		//シーン管理機能描画処理
 		SceneManager_Draw();
 
 		//裏画面の内容を表画面に反映

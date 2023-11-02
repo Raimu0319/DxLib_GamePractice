@@ -62,7 +62,7 @@ void SceneManager_Update(void)
 	switch (game_mode)
 	{
 	case E_TITLE:
-		TitleSceneUpdate();
+		TitleScene_Update();
 		break;
 	case E_GAMEMAIN:
 		GameMainScene_Update();
@@ -86,16 +86,16 @@ void SceneManager_Draw(void)
 	switch (game_mode)
 	{
 	case E_TITLE:
-		TitleScene_draw();
+		TitleScene_Draw();
 		break;
 	case E_GAMEMAIN:
-		GameMainScene_draw();
+		GameMainScene_Draw();
 		break;
 	case E_RANKING:
-		RankingScene_draw();
+		RankingScene_Draw();
 	case E_END:
 	default:
-		EndScene_draw();
+		EndScene_Draw();
 		break;
 	}
 }

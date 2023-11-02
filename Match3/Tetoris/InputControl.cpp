@@ -53,7 +53,8 @@ void InputControl_Update(void)
 		{
 			switch (button_state[i])
 			{
-			case E_NONE		:
+
+			case E_NONE:
 			case E_RELEASED:
 				button_state[i] = E_CLICK;
 				break;
@@ -74,6 +75,7 @@ void InputControl_Update(void)
 		{
 			switch (button_state[i])
 			{
+
 			case E_NONE:
 			case E_RELEASED:
 				button_state[i] = E_NONE;

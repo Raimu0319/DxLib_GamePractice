@@ -24,7 +24,7 @@ int EndScene_Initialize(void)
 	引　数：なし
 	戻り値：なし
 */
-void Endscene_Update(void)
+void EndScene_Update(void)
 {
 	wait_count++;
 }
@@ -44,7 +44,7 @@ void EndScene_Draw(void)
 	引　数：なし
 	戻り値：なし
 */
-void Get_Endtime(void)
+int Get_EndTime(void)
 {
 	if (wait_count > 300)
 	{

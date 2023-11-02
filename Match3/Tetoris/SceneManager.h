@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
-//ƒ}ƒNƒ’è‹`
+//ãƒã‚¯ãƒ­å®šç¾©
 #define D_ERROR		(-1)
 #define D_NORMALITY	(0)
 
-//Œ^’è‹`
+//å‹å®šç¾©
 enum GAME_MODE
 {
 	E_TITLE,
@@ -15,10 +15,10 @@ enum GAME_MODE
 
 };
 
-//ƒvƒƒgƒ^ƒCƒvéŒ¾
-void SceneManager_Initialize(GAME_MODE mode);		//‰Šú‰»ˆ—
-void SceneManager_Update(void);						//XVˆ—
-void SceneManager_Draw(void);						//•`‰æˆ—
+//ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
+void SceneManager_Initialize(GAME_MODE mode);		//åˆæœŸåŒ–å‡¦ç†
+void SceneManager_Update(void);						//æ›´æ–°å‡¦ç†
+void SceneManager_Draw(void);						//æç”»å‡¦ç†
 
-void Change_Scene(GAME_MODE mode);					//ƒV[ƒ“•ÏXˆ—
-int ErrorCheck(void);								//ƒGƒ‰[ƒ`ƒFƒbƒNˆ—
+void Change_Scene(GAME_MODE mode);					//ã‚·ãƒ¼ãƒ³å¤‰æ›´å‡¦ç†
+int ErrorCheck(void);								//ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯å‡¦ç†

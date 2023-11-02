@@ -77,30 +77,30 @@ void TitleScene_Update(void)
 		}
 	}
 
-			if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
-			{
-				PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-				if (cursor_number <= 0)
-				{
-					cursor_number = 0;
-				}
-				else
-				{
-					cursor_number--;
-				}
-			}
-			if (GetButtonUp(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
-			{
-				PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-				if (cursor_number >= 2)
-				{
-					cursor_number = 2;
-				}
-				else
-				{
-					cursor_number++;
-				}
-			}
+	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
+	{
+		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
+		if (cursor_number <= 0)
+		{
+			cursor_number = 0;
+		}
+		else
+		{
+			cursor_number--;
+		}
+	}
+	if (GetButtonUp(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
+	{
+		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
+		if (cursor_number >= 2)
+		{
+			cursor_number = 2;
+		}
+		else
+		{
+			cursor_number++;
+		}
+	}
 
 }
 
