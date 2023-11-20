@@ -105,14 +105,14 @@ void RankingScene_Draw(void)
 	{
 
 		case RANKING_INPUT_MODE:
-			ranking_input_name();
+			ranking_input_name_draw();
 			break;
 		case RANKING_DISP_MODE:
 		default:
 			for (i = 0; i < RANKING_MAX; i++)
 			{
 				DrawFormatString(20, 10 + (i * 25), GetColor(255, 255, 255),
-					"%2d,%10s,%10d", Ranking_Data[i].name, Ranking_Data[i].score);
+					"%2d,%10s,%10d",Ranking_Data[i].rank, Ranking_Data[i].name, Ranking_Data[i].score);
 			}
 
 		break;
@@ -193,8 +193,8 @@ void file_write(void)
 	{
 		for (i = 0; i < RANKING_MAX; i++)
 		{
-			fscanf_s(fp, "%2d, %[^,], %10d\n", &Ranking_Data[i].rank,
-				Ranking_Data[i].name, RANKING_NAME_LEN, &Ranking_Data[i].score);
+			fprintf(fp, "%2d, %s, %10d\n", Ranking_Data[i].rank,
+				Ranking_Data[i].name, &Ranking_Data[i].score);
 		}
 
 		fclose(fp);
@@ -272,7 +272,7 @@ void ranking_input_name(void)
 	}
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
 	{
-		if (Cursor.y > 4)
+		if (Cursor.y < 4)
 		{
 			Cursor.y++;
 		}
@@ -328,14 +328,14 @@ void ranking_input_name_draw(void)
 	//‘I‘ð—p•¶Žš‚ð•`‰æ
 	for (i = 0; i < 26; i++)
 	{
-		DrawFormatString((i % 13 * 50) + 300, (i / 13 *50) * 330, 
+		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 330, 
 			GetColor(255, 255, 255), "%-3c", 'a' + i);
-		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) * 430, 
+		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 430, 
 			GetColor(255, 255, 255), "%-3c", 'A' + i);
 	}
 	for (i = 0; i < 10; i++)
 	{
-		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) * 530,
+		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 530,
 			GetColor(255, 255, 255), "%-3c", '0' + i);
 	}
 

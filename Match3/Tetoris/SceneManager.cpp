@@ -69,6 +69,7 @@ void SceneManager_Update(void)
 		break;
 	case E_RANKING:
 		RankingScene_Update();
+		break;
 	case E_END:
 	default:
 		EndScene_Update();
@@ -93,6 +94,7 @@ void SceneManager_Draw(void)
 		break;
 	case E_RANKING:
 		RankingScene_Draw();
+		break;
 	case E_END:
 	default:
 		EndScene_Draw();
