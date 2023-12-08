@@ -405,7 +405,7 @@ void move_block(void)
 	}
 
 	//下入力時（ソフトドロップ処理）
-	if (GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))
+	if (GetButton(XINPUT_BUTTON_DPAD_DOWN))
 	{
 		if (check_overlap(DropBlock_X, DropBlock_Y + 1) == TRUE)
 		{

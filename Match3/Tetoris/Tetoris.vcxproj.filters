@@ -69,4 +69,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dat\rankingdata.csv" />
+  </ItemGroup>
 </Project>
