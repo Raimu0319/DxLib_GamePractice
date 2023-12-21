@@ -112,6 +112,10 @@ int Generate_Flg;		//生成フラグ
 int DeleteLine;			//消したラインの数
 int SoundEffict[3];		//SE
 
+//ブロックを続けて出ないようにする配列
+int block_log[7];
+int bc = 0;
+
 //プロトタイプ宣言
 void create_field(void);			//フィールドの生成処理
 void create_block(void);			//ブロックの生成処理
@@ -147,6 +151,11 @@ int Block_Initialize(void) {
 	ChangeVolumeSoundMem(150, SoundEffict[0]);
 	ChangeVolumeSoundMem(150, SoundEffict[1]);
 	ChangeVolumeSoundMem(130, SoundEffict[2]);
+
+	for (i = 0; i < BLOCK_TYPE_MAX; i++)
+	{
+		block_log[i] = FALSE;
+	}
 
 	//フィールドの生成
 	create_field();
@@ -345,9 +354,28 @@ void create_block(void)
 {
 	int i, j;		//ループカウンタ
 	int block_type;	//次に出現させるブロックタイプ
+	static int color_cnt = 0;
 
-	//次に出現させるブロックの決定する
-	block_type = GetRand(BLOCK_TYPE_MAX - 1);
+	// ブロックがかぶらないように次に出現させるブロックの決定する
+	do
+	{
+		block_type = GetRand(BLOCK_TYPE_MAX - 1); //GetRand(BLOCK_TYPE_MAX - 1)で0～6を取得してblock_typeに入れる
+
+	} while (block_log[block_type] == TRUE); //block_log[block_type]で0～6の配列を見てそこの中にTRUE(1)を入れる
+
+	// 色の追加
+	color_cnt++;
+	block_log[block_type] = TRUE;
+	
+	// ７色そろったら、リセットを行う
+	if (color_cnt >= BLOCK_TYPE_MAX)
+	{
+		for (i = 0; i < BLOCK_TYPE_MAX; i++)
+		{
+			block_log[i] = FALSE;
+		}
+		color_cnt = 0;
+	}
 
 	//新しいブロックをセット＆次のブロックを生成
 	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
